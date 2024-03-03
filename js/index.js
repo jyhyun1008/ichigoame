@@ -227,6 +227,7 @@ if (!page && !directory) {
         .then(() => {
             hover.pause();
             hover.currentTime = 0;
+            location.href = './?p=index'
         })
         .catch(error => {
             document.querySelector('#firstPage').style.display = 'flex';
