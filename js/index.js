@@ -272,7 +272,7 @@ if (!page && !directory) {
         },
         body: JSON.stringify({
             userId: '9pst070wee',
-            withFiles: true,
+            query: '이치고아메',
             limit: 100
         })
     }
@@ -284,16 +284,18 @@ if (!page && !directory) {
 
         if (imgRes.length != 0) {
             for (var i = 0; i<imgRes.length; i++) {
-                for (var j = 0; j < imgRes[i].files.length; j++) {
-                    imgs.push(imgRes[i].files[j].url)
-                    notes.push('https://i.peacht.art/notes/'+imgRes[i].id)
+                if (imgRes[i].files.length != 0) {
+                    for (var j = 0; j < imgRes[i].files.length; j++) {
+                        imgs.push(imgRes[i].files[j].url)
+                        notes.push('https://i.peacht.art/notes/'+imgRes[i].id)
+                    }
                 }
             }
             for (var i = 0; i < imgs.length; i++) {
                 document.querySelector(".gallery_list").innerHTML += '<div class="gallery"><a href="'+notes[i]+'" target="_blank"><img src="'+imgs[i]+'"></a></div>'
                 
             }
-            for (var i=0; i < imgs.length % 3 - 1; i++) {
+            for (var i=0; i < (imgs.length - 1) % 3; i++) {
                 document.querySelector(".gallery_list").innerHTML += '<div class="gallery"></div>'
             }
         }
