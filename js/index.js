@@ -264,7 +264,7 @@ if (!page && !directory) {
     document.querySelector(".page_title").innerText = page
     document.querySelector(".page_content").innerHTML += '<div class="gallery_list"></div>'
 
-    var findImgUrl = "https://i.peacht.art/api/users/notes"
+    var findImgUrl = "https://i.peacht.art/api/notes/search"
     var findImgParam = {
         method: 'POST',
         headers: {
