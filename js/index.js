@@ -217,6 +217,7 @@ function getQueryStringObject() {
 var qs = getQueryStringObject();
 var page = qs.p;
 var directory = qs.d;
+var notice = qs.n;
 
 if (!page && !directory) {
 
@@ -306,7 +307,27 @@ if (!page && !directory) {
         getToc();
     })
     .catch(err => { throw err });
-} else if (directory.split('/')[0]=='blog') {
+} else if (notice) {
+    var url = "https://raw.githubusercontent.com/jyhyun1008/yeohangdang/main/page/"+page+".md"
+    fetch(url)
+    .then(res => res.text())
+    .then((out) => {
+        var page_title = page.substring(page.lastIndexOf('/') + 1)
+        if (page_title.split('_').length == 3) {
+            var this_directory = page.split('/')[0]
+            var this_date = page_title.split('_')[1]
+            var this_title = page_title.split('_')[2]
+            document.querySelector(".page_title").innerText = this_title
+            document.querySelector(".page_content").innerHTML += '<div class="page_subtitle"><div><a href="./?d='+this_directory+'">'+this_directory+'</a></div><div><code>'+this_date+'</code></div></div>'
+        } else {
+            document.querySelector(".page_title").innerText = page_title
+        }
+        document.querySelector(".page_content").innerHTML += parseMd(out)
+        
+        getToc();
+    })
+    .catch(err => { throw err });
+}  else if (directory.split('/')[0]=='blog') {
     document.querySelector(".page_title").innerText = 'blog'
     document.querySelector(".page_content").innerHTML += '<div class="article_list"></div>'
     var url = 'https://i.peacht.art/socket.io'
@@ -351,6 +372,54 @@ if (!page && !directory) {
         getCat(directory.split('/')[0], categories);
 
     })
+} else if (directory.split('/')[0]=='notice') {
+    document.querySelector(".page_title").innerText = 'notice'
+    document.querySelector(".page_content").innerHTML += '<div class="article_list"></div>'
+    var url = "https://api.github.com/repos/jyhyun1008/yeohangdang/git/trees/main"
+    fetch(url)
+    .then(res => res.text())
+    .then((out) => {
+        var resultree1 = JSON.parse(out).tree;
+        for (var k=0; k < resultree1.length; k++) {
+            if (resultree1[k].path == 'page') {
+                var resulturl1 = resultree1[k].url
+                fetch(resulturl1)
+                .then(res2 => res2.text())
+                .then((out2) => {
+                    var resultree2 = JSON.parse(out2).tree;
+                    for (var i=0; i < resultree2.length; i++) {
+                        if (resultree2[i].path == directory.split('/')[0]) {
+                            var resulturl2 = resultree2[i].url
+                            fetch(resulturl2)
+                            .then(res3 => res3.text())
+                            .then((out3) => {
+                                var result = JSON.parse(out3).tree
+                                result.sort((a, b) => parseInt(b.path.split('_')[1]) - parseInt(a.path.split('_')[1]));
+                                var articles = []
+                                var categories = ['이치고아메']
+                                for (var j=0; j<result.length;j++) {
+                                    if (result[j].path.split('_')[0] == categories[0]) {
+                                        articles.push({
+                                            title: result[j].path.split('_')[2].split('.')[0],
+                                            category: result[j].path.split('_')[0],
+                                            date: result[j].path.split('_')[1]
+                                        })
+                                    }
+                                }
+
+                                for (var j=0; j<articles.length; j++){
+                                    document.querySelector(".article_list").innerHTML += '<div class="article"><a href="./?n='+directory.split('/')[0]+'/'+articles[j].category+'_'+articles[j].date+'_'+articles[j].title+'"><span>'+articles[j].title+'</span><span><code>'+articles[j].category+'</code> <code>'+articles[j].date+'</code></span></a></div>'
+                                }
+
+                                getCat(directory.split('/')[0], categories);
+                            })
+                        }
+                    }
+                })
+            }
+        }
+    })
+
 } else if (directory) {
     document.querySelector(".page_title").innerText = directory
     document.querySelector(".page_content").innerHTML += '<div class="article_list"></div>'
