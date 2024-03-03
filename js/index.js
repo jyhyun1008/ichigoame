@@ -308,13 +308,13 @@ if (!page && !directory) {
     })
     .catch(err => { throw err });
 } else if (notice) {
-    var url = "https://raw.githubusercontent.com/jyhyun1008/yeohangdang/main/page/"+page+".md"
+    var url = "https://raw.githubusercontent.com/jyhyun1008/yeohangdang/main/page/"+notice+".md"
     fetch(url)
     .then(res => res.text())
     .then((out) => {
-        var page_title = page.substring(page.lastIndexOf('/') + 1)
+        var page_title = notice.substring(notice.lastIndexOf('/') + 1)
         if (page_title.split('_').length == 3) {
-            var this_directory = page.split('/')[0]
+            var this_directory = notice.split('/')[0]
             var this_date = page_title.split('_')[1]
             var this_title = page_title.split('_')[2]
             document.querySelector(".page_title").innerText = this_title
