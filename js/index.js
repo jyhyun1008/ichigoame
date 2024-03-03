@@ -219,7 +219,7 @@ var page = qs.p;
 var directory = qs.d;
 var notice = qs.n;
 
-if (!page && !directory) {
+if (!page && !directory && !notice) {
 
     hover.pause();
     hover.currentTime = 0;
