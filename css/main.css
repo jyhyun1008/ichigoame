@@ -1,0 +1,320 @@
+@import url('https://cdn.jsdelivr.net/npm/galmuri@latest/dist/galmuri.css');
+
+audio {
+    display: none;
+}
+
+#firstPage {
+    position: fixed;
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    top: 5vh;
+    left: 5vw;
+    width: 90vw;
+    height: 90vh;
+    margin: 0;
+    text-align: center;
+    background: #ffffffc2;
+    border-radius: 15px;
+    border: 2px dashed var(--darkaccent);
+}
+
+#firstPage img {
+    width: 128px;
+    border-radius: 40%;
+    border: 2px dashed var(--darkaccent)
+}
+
+:root {
+    --accent: #fc5a8d;
+    --bg: #f6f1f1;
+    --darkaccent: color-mix(in srgb, var(--accent) 70%, #820080);
+    --lightaccent: color-mix(in srgb, var(--accent) 60%, #fbffbb);
+}
+
+body {
+    font-family: Galmuri11, sans-serif;
+    background-color: var(--bg);
+    background: radial-gradient(circle, transparent 20%, var(--bg) 20%, var(--bg) 80%, transparent 80%, transparent), radial-gradient(circle, transparent 20%, var(--bg) 20%, var(--accent) 80%, transparent 80%, transparent) 25px 25px, linear-gradient(var(--accent) 2px, transparent 2px) 0 -1px, linear-gradient(90deg, var(--accent) 2px, var(--bg) 2px) -1px 0;
+    background-size: 50px 50px, 50px 50px, 25px 25px, 25px 25px;
+    background-attachment: fixed;
+    overscroll-behavior: none;
+}
+
+#title-box {
+    position: fixed;
+    margin: 0 auto;
+    top: 50px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    z-index: 10
+}
+
+#logo img {
+    width: 128px;
+    border-radius: 40%;
+    border: 2px dashed var(--darkaccent)
+}
+
+#content-box {
+    width: 100%;
+    max-width: 800px;
+    margin: 270px auto 0 auto;
+    background: #ffffffc2;
+    padding: 10px;
+    border-radius: 15px;
+    border: 2px dashed var(--darkaccent);
+    height: calc(100vh - 400px);
+    max-height: 800px;
+    overflow: scroll;
+}
+
+#nav-box {
+    position: fixed;
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+    top: 200px;
+    left: 0;
+    right: 0;
+    background: var(--accent);
+    padding: 10px;
+    border-radius: 15px;
+    border: 2px dashed var(--darkaccent);
+    z-index: 10;
+}
+
+#projects-box {
+    top: calc(50vh - 210px);
+    opacity: 0.8;
+    position: fixed;
+    width: 100%;
+    max-width: 150px;
+    margin: 0 auto;
+    left: 0;
+    right: 950px;
+    background: var(--accent);
+    padding: 10px;
+    border-radius: 15px;
+    border: 2px dashed var(--darkaccent);
+    z-index: 11;
+}
+
+#toc-box {
+    top: calc(50vh);
+    opacity: 0.8;
+    position: fixed;
+    width: 100%;
+    max-width: 150px;
+    margin: 0 auto;
+    left: 950px;
+    right: 0;
+    background: var(--accent);
+    padding: 10px;
+    border-radius: 15px;
+    border: 2px dashed var(--darkaccent);
+    z-index: 11;
+}
+
+#nav {
+    display: flex;
+    justify-content: space-evenly;
+    gap: 10px;
+    color: #fff;
+}
+
+#projects-title, #toc-title {
+    text-align: center;
+    color: #fff;
+}
+
+#projects, #toc {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    background: #fff;
+    border: 2px dashed var(--darkaccent);
+    padding: 5px;
+    color: var(--accent);
+}
+
+#nav a, #projects a, #toc a {
+    color: inherit;
+    text-decoration: none;
+}
+
+#nav a:hover {
+    background-color: var(--lightaccent);
+    border-radius: 5px;
+}
+
+#projects a:hover, #toc a:hover {
+    background-color: var(--bg);
+    border-radius: 5px;
+}
+
+.page_title {
+    text-transform: uppercase;
+    text-align: center;
+    color: var(--accent);
+}
+
+.page_content {
+    padding: 10px 35px;
+    line-height: 1.9em;
+}
+
+blockquote{
+    border-left: 3px solid var(--accent);
+    margin-left: 0;
+    padding: 5px 0 5px 1em;
+    background: white;
+}
+
+.line {
+    color: var(--accent);
+}
+
+.article_list {
+    display: flex;
+    flex-direction: column;
+    border-bottom: 1px solid var(--accent);
+}
+
+.article a {
+    border-top: 1px solid var(--accent);
+    padding: 5px;
+    border-radius: 5px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    color: inherit;
+    text-decoration: none;
+}
+
+.article a:hover {
+    background-color: var(--lightaccent);
+    opacity: 0.5;
+}
+
+code {
+    padding: 3px;
+    border-radius: 5px;
+    background-color: var(--bg);
+}
+
+.page_subtitle {
+    text-transform: uppercase;
+    text-align: center;
+    margin-bottom: 50px;
+}
+
+.page_content a {
+    color: var(--accent);
+    text-decoration: none;
+}
+
+.page_content img {
+    border-radius: 10px;
+}
+
+.gallery_list {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    row-gap: 30px;
+}
+
+.gallery {
+    width: 30%;
+    padding: 10px 10px 5px 10px;
+    border-radius: 10px;
+    background-color: var(--bg);
+}
+
+.gallery img {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    object-fit:cover;
+}
+
+.gallery:hover {
+    background-color: var(--lightaccent);
+}
+
+@media (max-width: 1100px) {
+
+    #title-box {
+        position: fixed;
+        margin: 0 auto;
+        top: 30px;
+        left: 0;
+        right: 0;
+        text-align: center;
+    }
+
+    #logo img {
+        width: 50px;
+        border-radius: 40%;
+        border: 2px dashed var(--darkaccent)
+    }
+
+    #nav-box {
+        top: 120px;
+        padding: 10px 0;
+    }
+    
+    #toc-box {
+        display: none;
+    }
+
+    #projects-box {
+        max-width: 100%;
+        top: auto;
+        bottom: 0;
+        padding: 10px 0;
+    }
+
+    #projects {
+        flex-direction: row;
+        justify-content: space-evenly;
+    }
+
+    #content-box {
+        margin: 200px auto 139px auto;
+        padding: 0;
+        height: auto;
+        max-height: fit-content;
+        overflow: auto;
+    }
+    
+    .page_content {
+        padding: 5px;
+    }
+
+    .gallery {
+        width: 30%;
+        padding: 5px 5px 0 5px;
+        border-radius: 5px;
+    }
+    
+    #firstPage {
+        display: block;
+        position: fixed;
+        top: 0;
+        left: 0;
+        margin: 0;
+        width: 100%;
+        height: 130px;
+        z-index: 0;
+        border-radius: 0;
+    }
+    
+    #firstPage div {
+        display: none;
+    }
+}
