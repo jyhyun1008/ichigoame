@@ -28,7 +28,7 @@ audio {
 }
 
 :root {
-    --accent: #fc5a8d;
+    --accent: #ff2e67;
     --bg: #f6f1f1;
     --darkaccent: color-mix(in srgb, var(--accent) 70%, #820080);
     --lightaccent: color-mix(in srgb, var(--accent) 60%, #fbffbb);
