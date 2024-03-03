@@ -42,7 +42,6 @@ var themeColor = document.createElement('meta')
 themeColor.name = 'theme-color'
 themeColor.content = BG_COLOR
 document.getElementsByTagName('head')[0].appendChild(themeColor)
-
 function getToc() {
     var toc = document.getElementsByClassName('h1')
     if (toc.length > 0) {
@@ -65,24 +64,9 @@ function getToc() {
     hover.pause();
     hover.currentTime = 0;
     if (vw > 12) {
-    hover.play()
-    .then(() => {
-        hover.pause();
-        hover.currentTime = 0;
-    })
-    .catch(error => {
-        document.querySelector('#firstPage').style.display = 'flex';
-        document.querySelector('#wrapper').style.display = 'none';
-        document.querySelector('#firstPage').addEventListener("click", (e) => {
-            document.querySelector('#firstPage').style.display = 'none';
-            document.querySelector('#wrapper').style.display = 'block';
-        
-        })
-    })
-
-    $("a").mouseover(function() {
-        hoverPlay();
-    });
+        $("a").mouseover(function() {
+            hoverPlay();
+        });
     }
 
 }
@@ -106,24 +90,9 @@ function getCat(directory, arr) {
     hover.pause();
     hover.currentTime = 0;
     if (vw > 12) {
-    hover.play()
-    .then(() => {
-        hover.pause();
-        hover.currentTime = 0;
-    })
-    .catch(error => {
-        document.querySelector('#firstPage').style.display = 'flex';
-        document.querySelector('#wrapper').style.display = 'none';
-        document.querySelector('#firstPage').addEventListener("click", (e) => {
-            document.querySelector('#firstPage').style.display = 'none';
-            document.querySelector('#wrapper').style.display = 'block';
-        
-        })
-    });
-
-    $("a").mouseover(function() {
-        hoverPlay();
-    });
+        $("a").mouseover(function() {
+            hoverPlay();
+        });
     }
 
 }
@@ -250,16 +219,28 @@ var page = qs.p;
 var directory = qs.d;
 
 if (!page && !directory) {
-    var url = "https://raw.githubusercontent.com/"+USERNAME+"/"+REPOSITORY+"/main/page/index.md"
-    fetch(url)
-    .then(res => res.text())
-    .then((out) => {
-        document.querySelector(".page_title").innerText = 'index'
-        document.querySelector(".page_content").innerHTML += parseMd(out)
-        getToc();
-        
-    })
-    .catch(err => { throw err });
+
+    hover.pause();
+    hover.currentTime = 0;
+    if (vw > 12) {
+        hover.play()
+        .then(() => {
+            hover.pause();
+            hover.currentTime = 0;
+        })
+        .catch(error => {
+            document.querySelector('#firstPage').style.display = 'flex';
+            document.querySelector('#wrapper').style.display = 'none';
+            document.querySelector('#firstPage').addEventListener("click", (e) => {
+                location.href = './?p=index'
+            })
+        })
+
+        $("a").mouseover(function() {
+            hoverPlay();
+        });
+    }
+
 } else if (page == 'gallery') {
     document.querySelector(".page_title").innerText = page
     document.querySelector(".page_content").innerHTML += '<div class="gallery_list"></div>'
