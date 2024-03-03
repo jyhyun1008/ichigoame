@@ -240,7 +240,9 @@ if (!page && !directory) {
         $("a").mouseover(function() {
             hoverPlay();
         });
-    }
+    } else {
+        location.href = './?p=index'
+    } 
 
 } else if (page == 'gallery') {
     document.querySelector(".page_title").innerText = page
