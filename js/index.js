@@ -306,6 +306,51 @@ if (!page && !directory) {
         getToc();
     })
     .catch(err => { throw err });
+} else if (directory.split('/')[0]=='blog') {
+    document.querySelector(".page_title").innerText = 'blog'
+    document.querySelector(".page_content").innerHTML += '<div class="article_list"></div>'
+    var url = 'https://i.peacht.art/socket.io'
+    fetch(url)
+    .then(res => {return res.json()})
+    .then((out) => {
+        var result = out.data
+        var articles = []
+        var categories = []
+        for (var i=0; i<result.length; i++) {
+            if (result[i].relationships.user_defined_tags.data[0].id.split(';')[1] == '이치고아메') {
+                var cate = '미분류'
+                if (result[i].relationships.user_defined_tags.data.length > 1) {
+                    cate = result[i].relationships.user_defined_tags.data[1].id.split(';')[1]
+                }
+                articles.push({
+                    title: result[i].attributes.title,
+                    category: cate,
+                    date: result[i].attributes.created_at.substring(2, 4)+result[i].attributes.created_at.substring(5, 7)+result[i].attributes.created_at.substring(8, 10),
+                    url: result[i].attributes.url,
+                })
+                categories.push(cate)
+            }
+        }
+
+        var categorieset = new Set(categories);
+        categories = [...categorieset];
+        var category
+
+        if (directory.split('/').length == 1) {
+            category = ''
+        } else {
+            category = directory.split('/')[1]
+        }
+
+        for (var j=0; j<articles.length; j++){
+            if (articles[j].category == category || category == ''){
+                document.querySelector(".article_list").innerHTML += '<div class="article"><a href="'+articles[j].url+'" target="_blank"><span>'+articles[j].title+'</span><span><code>'+articles[j].category+'</code> <code>'+articles[j].date+'</code></span></a></div>'
+            }
+        }
+
+        getCat(directory.split('/')[0], categories);
+
+    })
 } else if (directory) {
     document.querySelector(".page_title").innerText = directory
     document.querySelector(".page_content").innerHTML += '<div class="article_list"></div>'
